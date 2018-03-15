@@ -1,0 +1,66 @@
+\documentclass[tikz,border=5]{standalone}
+\usepackage[latin1]{inputenc}
+\usetikzlibrary{shapes,arrows}
+\usepackage{caption}
+\newcommand*{\h}{\hspace{5pt}}% for indentation
+\newcommand*{\hh}{\h\h}% double indentation
+\begin{document}
+	\tikzstyle{block}=[rectangle, draw=black, thick, fill=white, text centered]
+  \begin{tikzpicture}
+    \coordinate (start) at (0,0);
+    \path (start)+(1.5,0) node (c1) [shape=circle,draw] {};
+    \node at (3,0) [block] (rp) {$ R_{\psi}^{P/PI}(s) $};
+    \path (rp)+(2.5,0) node (c2) [shape=circle,draw] {};
+    \node at (7,0) [block] (ro) {$ R_{\omega}^{P/PI}(s) $};
+    \path (ro)+(2.2,0) node (c3) [shape=circle,draw] {};
+    \node at (10.5,0) [block] (ri) {$ R_{I}(s) $};
+    \node at (12.5,0) [block] (hlv) {$ H_{LV}(s) $};
+    \node at (14.5,0) [block] (hel) {$ H_{LV}(s) $};
+    \coordinate (iq) at (15.5,0);
+    \coordinate (iq1) at (15.5,-1);
+    \coordinate (iq2) at (9.2,-1);
+    \node at (16.5,0) [block] (ho) {$ H_{\omega}(s) $};
+    \path (ho)+(1.3,0) node (c4) [shape=circle,draw] {};
+    \coordinate (om) at (18.5,0);
+    \coordinate (om1) at (18.5,-1.5);
+    \coordinate (om2) at (5.5,-1.5);
+    \node at (19.5,0) [block] (hp) {$ H_{\psi}(s) $};
+    \coordinate (pm) at (20.5,0);
+    \coordinate (pm1) at (20.5,-2);
+    \coordinate (pm2) at (1.5,-2);
+    \coordinate (end) at (21.5,0);
+    %Stoerung
+    \node at (15,1.3) [block] (st1) {$ M_{L} $};
+    \node at (16.6,1.3) [block] (stp) {$ 1/Js $};
+    \coordinate (st) at (17.8,1.3);
+    
+    \path[->,very thick]
+    (start) edge node[anchor=south]{$\psi_{m,soll}$} (c1)
+    (c1) edge node[anchor=south]{$e$} (rp)
+    (rp) edge node[anchor=south]{$\omega_{m,soll}$} (c2)
+    (c2) edge node[anchor=south]{} (ro)
+    (ro) edge node[anchor=south]{$q_{m,soll}$} (c3)
+    (c3) edge node[anchor=south]{} (ri)
+    (ri) edge node[anchor=south]{} (hlv)
+    (hlv) edge node[anchor=south]{} (hel)
+    (iq2) edge node[anchor=south,xshift=-5]{-} (c3)
+    (hel) edge node[anchor=south]{$q_{m}$} (ho)
+    (om2) edge node[anchor=south,xshift=-5,yshift=6]{-} (c2)
+    (ho) edge node[anchor=south]{} (c4)
+    (c4) edge node[anchor=south]{$\omega_{m}$} (hp)
+    (pm2) edge node[anchor=south,xshift=-5,yshift=12]{-} (c1)
+    (hp) edge node[anchor=south]{$\psi_{m}$} (end)
+    %Stoerung
+    (st1) edge node[anchor=south]{} (stp)
+    (st) edge node[anchor=south,xshift=-5,yshift=-15]{-} (c4);
+    
+    \path[very thick]
+    (iq) edge (iq1)
+    (iq1) edge (iq2)
+    (om) edge (om1)
+    (om1) edge (om2)
+    (pm) edge (pm1)
+    (pm1) edge (pm2)
+    (stp) edge (st);
+  \end{tikzpicture}
+\end{document}

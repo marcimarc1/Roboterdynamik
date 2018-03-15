@@ -1,0 +1,41 @@
+\documentclass[tikz,border=5]{standalone}
+\usepackage[latin1]{inputenc}
+\usetikzlibrary{shapes,arrows}
+\usepackage{caption}
+\newcommand*{\h}{\hspace{5pt}}% for indentation
+\newcommand*{\hh}{\h\h}% double indentation
+\begin{document}
+	\tikzstyle{block}=[rectangle, draw=black, thick, fill=white, text centered]
+  \begin{tikzpicture}
+    \coordinate (start) at (0,0);
+    \path (start)+(1.5,0) node (c1) [shape=circle,draw] {};
+    \node at (3.5,0) [block] (ri) {$ R_{\omega}(s) $};
+    \node at (6.3,0) [block] (hlv) {$ K_{I}(s) $};
+    \node at (9,0) [block] (hel) {$ H_{\omega}(s) $};
+    \path (hel)+(1.5,0) node (c2) [shape=circle,draw] {};
+    \node at (7,1.5) [block] (hm) {$ M_{L} $};
+    \node at (9,1.5) [block] (hmp) {$ 1/Js $};
+    
+    \coordinate (st) at (10.5,1.5);
+    \coordinate (iq) at (11.7,0);
+    \coordinate (iq1) at (11.7,-1);
+    \coordinate (iq2) at (1.5,-1);
+    \coordinate (end) at (12.5,0);
+    
+    \path[->,very thick]
+    (start) edge node[anchor=south]{$\omega_{m,soll}$} (c1)
+    (c1) edge node[anchor=south]{$e$} (ri)
+    (ri) edge node[anchor=south]{$I_{q,soll}$} (hlv)
+    (hlv) edge node[anchor=south]{$I_{q}(s)$} (hel)
+    (hel) edge node[anchor=south]{} (c2)
+    (c2) edge node[anchor=south]{$\omega_{m}$} (end)
+    (iq2) edge node[anchor=south,xshift=-5]{-} (c1)
+    (hm) edge node[anchor=south]{} (hmp)
+    (st) edge node[anchor=south,xshift=5,yshift=-18]{-} (c2);
+    
+    \path[very thick]
+    (iq) edge (iq1)
+    (iq1) edge (iq2)
+    (hmp) edge (st);
+  \end{tikzpicture}
+\end{document}
